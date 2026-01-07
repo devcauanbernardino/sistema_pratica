@@ -1,47 +1,61 @@
-<?php 
+<?php
+require_once 'includes/protect.php';
+require_once 'includes/header.php';
 
-require_once 'validador_acesso.php';
 
+$dados = [
+    'acessos' => rand(10, 100),
+    'tarefas' => rand(1, 10),
+    'avisos' => rand(0, 3)
+];
 ?>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <title>Painel</title>
+<h2 id="saudacao"></h2>
+<p>Data: <strong id="current-datetime"></strong></p>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<script>
+    const now = new Date();
+    const hour = new Date().getHours();
 
-<body class="bg-light">
+    const saudacao = document.getElementById('saudacao');
 
-<div class="container mt-5">
+    if (hour < 12) {
+        saudacao.innerText = 'Bom dia, <?= $_SESSION['nome'] ?>!';
+        document.body.style.backgroundColor = '#e0f7fa';
+    } else if (hour < 18) {
+        saudacao.innerText = 'Boa tarde, <?= $_SESSION['nome'] ?>!';
+        document.body.style.backgroundColor = '#fff3e0';
+    } else {
+        saudacao.innerText = 'Boa noite, <?= $_SESSION['nome'] ?>!';
+        document.body.style.backgroundColor = '#ede7f6';
+    }
 
-    <div class="card shadow">
-        <div class="card-header bg-success text-white">
-            <?php 
-                echo "<h4 class='mb-0'>Dashboard - Perfil: " . $_SESSION['perfil_id'] . "</h4>";
-            ?>
-        </div>
+    const format = now.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
 
-        <div class="card-body">
+    document.getElementById('current-datetime').innerText = format;
 
-            <h5>Bem-vindo, 
-                <!-- PHP AQUI (nome do usuário da session) -->
-                 <?php 
-                    echo $_SESSION['nome'];
-                 ?>!
-            </h5>
+</script>
 
-            <p class="text-muted">
-                Você está logado usando sessão.
-            </p>
-
-            <a href="logout.php" class="btn btn-danger">Sair</a>
-
-        </div>
+<div class="row mt-4">
+    <div class="col-md-4">
+        <div class="card p-3">Acessos hoje: <?= $dados['acessos'] ?></div>
     </div>
-
+    <div class="col-md-4">
+        <div class="card p-3">Tarefas pendentes: <?= $dados['tarefas'] ?></div>
+    </div>
+    <div class="col-md-4">
+        <div class="card p-3">Avisos: <?= $dados['avisos'] ?></div>
+    </div>
 </div>
 
-</body>
-</html>
+
+<?php
+if ($_SESSION['perfil_id'] === 'Administrativo') {
+    echo '<div class="alert alert-warning mt-4">Área administrativa</div>';
+}
+
+require_once 'includes/footer.php';
+

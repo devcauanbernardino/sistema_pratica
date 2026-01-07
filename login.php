@@ -10,12 +10,12 @@
 
 <body class="bg-light">
 
-    <div class="container mt-5">
-        <div class="row justify-content-center">
+    <div class="container">
+        <div class="row justify-content-center align-items-center vh-100">
 
             <div class="col-md-4">
                 <div class="card shadow">
-                    <div class="card-header bg-primary text-white text-center">
+                    <div class="card-header bg-dark text-white text-center">
                         <h4 class="mb-0">Login</h4>
                     </div>
 
@@ -40,7 +40,7 @@
                             </div>
 
                             <?php
-                            if (isset($_GET['login']) && $_GET['login'] == 'erro') {
+                            if (isset($_GET['login']) && $_GET['login'] == 'usuario_invalido') {
                                 echo '<div class="alert alert-danger" role="alert">
                                     Usuário ou senha inválido(s).
                                   </div>';

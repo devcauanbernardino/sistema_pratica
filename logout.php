@@ -1,5 +1,5 @@
 <?php 
-    require_once 'valida.php';
+    session_start();
 
     session_destroy();
 
