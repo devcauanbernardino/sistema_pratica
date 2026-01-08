@@ -51,11 +51,19 @@ $dados = [
     </div>
 </div>
 
-
 <?php
 if ($_SESSION['perfil_id'] === 'Administrativo') {
     echo '<div class="alert alert-warning mt-4">Área administrativa</div>';
 }
+?>
 
+</div> <!-- FECHA O CONTAINER AQUI -->
+
+<?php
 require_once 'includes/footer.php';
+?>
+
+
+
+
 

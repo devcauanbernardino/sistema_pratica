@@ -1,4 +1,4 @@
-<footer class="bg-dark text-light mt-5">
+<footer class="bg-dark text-light ">
     <div class="container py-4">
         <div class="row">
             <!-- Sistema -->
@@ -39,6 +39,6 @@
     </div>
 </footer>
 
-</div> <!-- fecha container do header -->
+<!-- fecha container do header -->
 </body>
 </html>
