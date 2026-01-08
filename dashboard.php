@@ -12,32 +12,15 @@ $dados = [
 <h2 id="saudacao"></h2>
 <p>Data: <strong id="current-datetime"></strong></p>
 
-<script>
-    const now = new Date();
-    const hour = new Date().getHours();
+<a href="cadastro_tarefas.php" class="btn btn-success mb-4">
+    <i class="bi bi-plus-circle"></i> Nova tarefa
+</a>
 
-    const saudacao = document.getElementById('saudacao');
+<?php
 
-    if (hour < 12) {
-        saudacao.innerText = 'Bom dia, <?= $_SESSION['nome'] ?>!';
-        document.body.style.backgroundColor = '#e0f7fa';
-    } else if (hour < 18) {
-        saudacao.innerText = 'Boa tarde, <?= $_SESSION['nome'] ?>!';
-        document.body.style.backgroundColor = '#fff3e0';
-    } else {
-        saudacao.innerText = 'Boa noite, <?= $_SESSION['nome'] ?>!';
-        document.body.style.backgroundColor = '#ede7f6';
-    }
+require_once 'js_date.php';
 
-    const format = now.toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    });
-
-    document.getElementById('current-datetime').innerText = format;
-
-</script>
+?>
 
 <div class="row mt-4">
     <div class="col-md-4">
@@ -57,13 +40,81 @@ if ($_SESSION['perfil_id'] === 'Administrativo') {
 }
 ?>
 
+<h4 class="mt-5 mb-3">Minhas tarefas</h4>
+<div class="row">
+    <?php if (!empty($_SESSION['tarefas'])): ?>
+        <?php foreach ($_SESSION['tarefas'] as $index => $tarefa): ?>
+            <div class="col-md-4 mb-3">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <button data-bs-toggle="modal" data-bs-target="#modalEditar-<?= htmlspecialchars($tarefa['id']) ?>" data-id="INDEX_DA_TAREFA"
+                            data-titulo="TITULO" data-descricao="DESCRICAO">
+                            <i class="bi bi-pencil-square">
+                            </i>
+                        </button>
+
+                        <h5 class="card-title">
+                            <?= htmlspecialchars($tarefa['titulo']) ?>
+                        </h5>
+
+                        <p class="card-text">
+                            <?= htmlspecialchars($tarefa['descricao']) ?>
+                        </p>
+
+                        <span class="badge bg-secondary">
+                            <?= ucfirst($tarefa['status']) ?>
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="modalEditar-<?= htmlspecialchars($tarefa['id']) ?>" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalTitulo">
+                                Editar tarefa
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <p id="modalDescricao" class="mb-4 text-muted"></p>
+                            
+
+                            <!-- FORM CONCLUIR -->
+                            <form action="tarefas/concluir.php" method="POST" class="d-inline">
+                                <input type="hidden" name="id" id="tarefaConcluir">
+                                <button class="btn btn-success w-100 mb-2">
+                                    Concluir tarefa
+                                </button>
+                            </form>
+
+                            <!-- FORM EXCLUIR -->
+                            <form action="tarefas/excluir.php" method="POST">
+                                <input type="hidden" name="id" id="tarefaExcluir">
+                                <button class="btn btn-danger w-100">
+                                    Excluir tarefa
+                                </button>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <p>Nenhuma tarefa cadastrada.</p>
+    <?php endif; ?>
+</div>
+
+<!-- MODAL EDITAR TAREFA -->
+
+
+
 </div> <!-- FECHA O CONTAINER AQUI -->
 
 <?php
 require_once 'includes/footer.php';
 ?>
-
-
-
-
-
