@@ -12,7 +12,7 @@ $_SESSION['tarefas'][] = [
     'id' => uniqid(),
     'titulo' => $titulo,
     'descricao' => $descricao,
-    'status' => 'pendente'
+    'status' => 'Pendente'
 ];
 
 header('Location: dashboard.php');
