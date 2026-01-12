@@ -1,6 +1,6 @@
 </div> <!-- FECHA container -->
 </main> <!-- FECHA main -->
-<footer class="bg-dark text-light mt-5">
+<footer class="bg-dark text-light">
     <div class="container py-4">
         <div class="row">
             <!-- Sistema -->

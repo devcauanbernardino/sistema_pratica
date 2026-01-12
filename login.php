@@ -6,9 +6,16 @@
     <title>Login</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+        body {
+            background-color: rgba(223, 223, 223, 0.643);
+        }
+    </style>
 </head>
 
-<body class="bg-light">
+<body>
 
     <div class="container">
         <div class="row justify-content-center align-items-center vh-100">

@@ -14,6 +14,9 @@ foreach ($_SESSION['tarefas'] as $index => $tarefa) {
     }
 }
 
-header('Location: dashboard.php');
+$redirect = $_POST['redirect'] ?? 'dashboard.php';
+
+header("Location: $redirect");
+exit;
 
 ?>

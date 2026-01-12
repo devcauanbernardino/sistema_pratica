@@ -12,7 +12,11 @@ foreach ($_SESSION['tarefas'] as $index => $tarefa) {
     }
 }
 
-// 3. Volta pro dashboard
-header('Location: dashboard.php');
+// 3. Volta
+$redirect = $_POST['redirect'] ?? 'dashboard.php';
+
+header("Location: $redirect");
+exit;
+
 
 ?>
