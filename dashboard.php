@@ -56,6 +56,16 @@ require_once 'includes/header.php';
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
 
+                                <small class="text-muted d-block">
+                                    <i class="bi bi-play-circle"></i>
+                                    Início: <?= date('d/m/Y', strtotime($tarefa['data_inicio'])) ?>
+                                </small>
+
+                                <small class="text-muted d-block mb-2">
+                                    <i class="bi bi-flag"></i>
+                                    Prazo: <?= date('d/m/Y', strtotime($tarefa['data_prazo'])) ?>
+                                </small>
+
                                 <h5><?= htmlspecialchars($tarefa['titulo']) ?></h5>
                                 <p><?= htmlspecialchars($tarefa['descricao']) ?></p>
                                 <small class="text-muted d-block mb-2">

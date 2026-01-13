@@ -10,7 +10,7 @@ require_once 'includes/header.php';
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="flex-fill p-4" style="min-height: 100vh;">
         <div class="row justify-content-center">
-            
+
             <div class="col-lg-8 col-xl-7">
                 <h2 class="mb-4">Cadastrar Nova Tarefa</h2>
                 <div class="card shadow-sm">
@@ -20,23 +20,27 @@ require_once 'includes/header.php';
 
                             <div class="mb-3">
                                 <label class="form-label">Título</label>
-                                <input
-                                    type="text"
-                                    name="titulo"
-                                    class="form-control"
-                                    placeholder="Digite o título da tarefa"
-                                    required
-                                >
+                                <input type="text" name="titulo" class="form-control"
+                                    placeholder="Digite o título da tarefa" required>
                             </div>
 
                             <div class="mb-4">
                                 <label class="form-label">Descrição</label>
-                                <textarea
-                                    name="descricao"
-                                    class="form-control"
-                                    rows="4"
-                                    placeholder="Descreva a tarefa"
-                                ></textarea>
+                                <textarea name="descricao" class="form-control" rows="4"
+                                    placeholder="Descreva a tarefa"></textarea>
+                            </div>
+
+                            <!-- DATAS -->
+                            <div class="row mb-4">
+                                <div class="col-md-6">
+                                    <label class="form-label">Data de início</label>
+                                    <input type="date" name="data_inicio" class="form-control" required>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label class="form-label">Prazo</label>
+                                    <input type="date" name="data_prazo" class="form-control" required>
+                                </div>
                             </div>
 
                             <div class="d-flex gap-2">
@@ -50,6 +54,7 @@ require_once 'includes/header.php';
                             </div>
 
                         </form>
+
 
                     </div>
                 </div>
