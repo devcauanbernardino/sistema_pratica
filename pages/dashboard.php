@@ -1,10 +1,10 @@
 <?php
-require_once 'includes/protect.php';
-require_once 'includes/header.php';
+require_once '../includes/protect.php';
+require_once '../includes/header.php';
 ?>
 
 <div class="d-flex">
-    <?php require_once 'includes/sidebar.php'; ?>
+    <?php require_once '../includes/sidebar.php'; ?>
     <div class="container p-4">
         <h2 id="saudacao"></h2>
         <p>Data: <strong id="current-datetime"></strong></p>
@@ -35,9 +35,9 @@ require_once 'includes/header.php';
 
         </script>
 
-        <?php if ($_SESSION['perfil_id'] === 'Administrativo'): ?>
+        <!-- <?php if ($_SESSION['perfil_id'] === 'Administrativo'): ?>
             <div class="alert alert-warning mt-4">Área administrativa</div>
-        <?php endif; ?>
+        <?php endif; ?> -->
 
         <h4 class="mt-5 mb-3">Minhas tarefas</h4>
 
@@ -56,16 +56,6 @@ require_once 'includes/header.php';
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
 
-                                <small class="text-muted d-block">
-                                    <i class="bi bi-play-circle"></i>
-                                    Início: <?= date('d/m/Y', strtotime($tarefa['data_inicio'])) ?>
-                                </small>
-
-                                <small class="text-muted d-block mb-2">
-                                    <i class="bi bi-flag"></i>
-                                    Prazo: <?= date('d/m/Y', strtotime($tarefa['data_prazo'])) ?>
-                                </small>
-
                                 <h5><?= htmlspecialchars($tarefa['titulo']) ?></h5>
                                 <p><?= htmlspecialchars($tarefa['descricao']) ?></p>
                                 <small class="text-muted d-block mb-2">
@@ -77,6 +67,17 @@ require_once 'includes/header.php';
                                 <?php else: ?>
                                     <span class="badge bg-secondary">Pendente</span>
                                 <?php endif; ?>
+
+                                <div class="d-flex justify-content-start align-items-center mt-2">
+                                    <small class="text-muted d-block me-3">
+                                        <i class="bi bi-play-circle"></i>
+                                        Início: <?= date('d/m/Y', strtotime($tarefa['data_inicio'])) ?>
+                                    </small>
+                                    <small class="text-muted d-block">
+                                        <i class="bi bi-flag"></i>
+                                        Prazo: <?= date('d/m/Y', strtotime($tarefa['data_prazo'])) ?>
+                                    </small>
+                                </div>
 
                             </div>
                         </div>
@@ -102,7 +103,7 @@ require_once 'includes/header.php';
                 <div class="modal-body">
 
                     <!-- EDITAR -->
-                    <form action="editar.php" method="POST" class="mb-3">
+                    <form action="../controllers/editar.php" method="POST" class="mb-3">
                         <input type="hidden" name="id" id="editarId">
 
                         <div class="mb-2">
@@ -121,7 +122,7 @@ require_once 'includes/header.php';
                     </form>
 
                     <!-- CONCLUIR -->
-                    <form action="concluir.php" method="POST" class="mb-2">
+                    <form action="../controllers/concluir.php" method="POST" class="mb-2">
                         <input type="hidden" name="id" id="concluirId">
                         <button class="btn btn-success w-100">
                             Concluir tarefa
@@ -129,7 +130,7 @@ require_once 'includes/header.php';
                     </form>
 
                     <!-- EXCLUIR -->
-                    <form action="excluir.php" method="POST">
+                    <form action="../controllers/excluir.php" method="POST">
                         <input type="hidden" name="id" id="excluirId">
                         <button class="btn btn-danger w-100">
                             Excluir tarefa
@@ -141,6 +142,6 @@ require_once 'includes/header.php';
         </div>
     </div>
 
-    <?php require_once './js/js.php' ?>
+    <?php require_once '../js/js.php' ?>
 
-    <?php require_once 'includes/footer.php'; ?>
+    <?php require_once '../includes/footer.php'; ?>

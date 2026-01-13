@@ -16,9 +16,6 @@
             <div class="col-md-4 mb-3">
                 <h5 class="fw-bold">Usuário logado</h5>
                 <p class="mb-1"><?= $_SESSION['nome'] ?></p>
-                <small class="text-secondary">
-                    Perfil: <?= $_SESSION['perfil_id'] ?>
-                </small>
             </div>
 
             <!-- Data -->

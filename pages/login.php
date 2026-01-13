@@ -31,13 +31,13 @@
                         <!-- mensagem de erro via GET -->
                         <!-- PHP AQUI -->
 
-                        <form action="valida.php" method="POST">
+                        <form action="../controllers/valida.php" method="POST">
                             <div class="mb-3">
                                 <label class="form-label">Nome</label>
                                 <input type="text" name="nome" class="form-control" required>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">Usuário</label>
+                                <label class="form-label">Email</label>
                                 <input type="text" name="usuario" class="form-control" required>
                             </div>
 
@@ -62,8 +62,10 @@
                             }
                             ?>
 
-                            <button class="btn btn-success w-100">Entrar</button>
-
+                            <div class="d-flex justify-content-around">
+                                <button class="btn btn-success">Entrar</button>
+                                <a href="cadastro.php"   class="btn btn-primary">Cadastrar</a>
+                            </div>
                         </form>
                     </div>
                 </div>

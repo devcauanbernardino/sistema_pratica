@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/protect.php';
+require_once '../includes/protect.php';
 
 $titulo = $_POST['titulo'] ?? '';
 $descricao = $_POST['descricao'] ?? '';
@@ -22,7 +22,7 @@ $_SESSION['tarefas'][] = [
 ];
 
 
-header('Location: dashboard.php');
+header('Location: ../pages/dashboard.php');
 
 
 

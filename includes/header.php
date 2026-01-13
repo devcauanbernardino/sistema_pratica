@@ -32,16 +32,15 @@
 <body>
     <nav class="navbar navbar-dark bg-dark px-3">
         <span class="navbar-text text-white">
-            <button class="btn btn-outline-light me-2" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
-                aria-expanded="true">
+            <button class="btn btn-outline-light me-2" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu"
+                aria-controls="sidebarMenu">
                 <i class="bi bi-list fs-5"></i>
             </button>
-
 
             <?= $_SESSION['nome'] ?>
 
         </span>
-        <a href="logout.php" class="btn btn-danger btn-sm">Sair</a>
+        <a href="../controllers/logout.php" class="btn btn-danger btn-sm">Sair</a>
     </nav>
 
 

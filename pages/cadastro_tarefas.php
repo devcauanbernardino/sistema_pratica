@@ -1,11 +1,11 @@
 <?php
-require_once 'includes/protect.php';
-require_once 'includes/header.php';
+require_once '../includes/protect.php';
+require_once '../includes/header.php';
 ?>
 
 <div class="d-flex">
 
-    <?php require_once 'includes/sidebar.php'; ?>
+    <?php require_once '../includes/sidebar.php'; ?>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="flex-fill p-4" style="min-height: 100vh;">
@@ -16,7 +16,7 @@ require_once 'includes/header.php';
                 <div class="card shadow-sm">
                     <div class="card-body">
 
-                        <form action="salvar.php" method="POST">
+                        <form action="../controllers/salvar.php" method="POST">
 
                             <div class="mb-3">
                                 <label class="form-label">Título</label>
@@ -65,5 +65,5 @@ require_once 'includes/header.php';
     </main>
 </div>
 
-<?php require_once 'js/js.php'; ?>
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../js/js.php'; ?>
+<?php require_once '../includes/footer.php'; ?>

@@ -1,11 +1,11 @@
 <?php
-require_once 'includes/protect.php';
-require_once 'includes/header.php';
+require_once '../includes/protect.php';
+require_once '../includes/header.php';
 ?>
 
 <div class="d-flex">
 
-    <?php require_once 'includes/sidebar.php'; ?>
+    <?php require_once '../includes/sidebar.php'; ?>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="container p-4" style="min-height: 100vh;">
@@ -84,7 +84,7 @@ require_once 'includes/header.php';
             <div class="modal-body">
 
                 <!-- EDITAR -->
-                <form action="editar.php" method="POST" class="mb-3">
+                <form action="../controllers/editar.php" method="POST" class="mb-3">
                     <input type="hidden" name="id" id="editarId">
                     <input type="hidden" name="redirect" value="<?= basename($_SERVER['PHP_SELF']) ?>">
 
@@ -105,7 +105,7 @@ require_once 'includes/header.php';
 
 
                 <!-- CONCLUIR -->
-                <form action="concluir.php" method="POST" class="mb-2">
+                <form action="../controllers/concluir.php" method="POST" class="mb-2">
                     <input type="hidden" name="id" id="concluirId">
                     <input type="hidden" name="redirect" value="<?= basename($_SERVER['PHP_SELF']) ?>">
 
@@ -116,7 +116,7 @@ require_once 'includes/header.php';
 
 
                 <!-- EXCLUIR -->
-                <form action="excluir.php" method="POST">
+                <form action="../controllers/excluir.php" method="POST">
                     <input type="hidden" name="id" id="excluirId">
                     <input type="hidden" name="redirect" value="<?= basename($_SERVER['PHP_SELF']) ?>">
 
@@ -156,5 +156,5 @@ require_once 'includes/header.php';
 </script>
 
 
-<?php require_once 'js/js.php'; ?>
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../js/js.php'; ?>
+<?php require_once '../includes/footer.php'; ?>
