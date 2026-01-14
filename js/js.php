@@ -18,21 +18,25 @@
     });
 
 
-    const modalEditar = document.getElementById('modalEditar');
+    document.addEventListener('DOMContentLoaded', function () {
 
-    modalEditar.addEventListener('show.bs.modal', function (event) {
-        const botao = event.relatedTarget;
+        const modal = document.getElementById('modalEditar');
 
-        const id = botao.getAttribute('data-id');
-        const titulo = botao.getAttribute('data-titulo');
-        const descricao = botao.getAttribute('data-descricao');
+        modal.addEventListener('show.bs.modal', function (event) {
 
-        // Preenche o modal
-        document.getElementById('modalTitulo').innerText = titulo;
-        document.getElementById('modalDescricao').innerText = descricao;
+            const button = event.relatedTarget;
 
-        // Preenche os inputs hidden
-        document.getElementById('tarefaConcluir').value = id;
-        document.getElementById('tarefaExcluir').value = id;
+            const id = button.getAttribute('data-id');
+            const titulo = button.getAttribute('data-titulo');
+            const descricao = button.getAttribute('data-descricao');
+
+            document.getElementById('editarId').value = id;
+            document.getElementById('editarTitulo').value = titulo;
+            document.getElementById('editarDescricao').value = descricao;
+
+            document.getElementById('concluirId').value = id;
+            document.getElementById('excluirId').value = id;
+        });
+
     });
 </script>

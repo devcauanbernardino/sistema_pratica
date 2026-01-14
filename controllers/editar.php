@@ -1,22 +1,40 @@
-<?php 
+<?php
+require_once '../includes/protect.php';
+require_once 'conexao.php';
 
-session_start();
-
-$id = $_POST['id'] ?? null;
+// Dados vindos do formulário
+$id_tarefa = $_POST['id'] ?? null;
 $titulo = $_POST['titulo'] ?? '';
 $descricao = $_POST['descricao'] ?? '';
+$redirect = $_POST['redirect'] ?? 'dashboard.php';
 
-foreach ($_SESSION['tarefas'] as $index => $tarefa) {
-    if ($tarefa['id'] === $id) {
-        $_SESSION['tarefas'][$index]['titulo'] = $titulo;
-        $_SESSION['tarefas'][$index]['descricao'] = $descricao;
-        break;
-    }
+// ID do usuário logado
+$id_usuario = $_SESSION['id_usuario'];
+
+// Validação básica
+if (!$id_tarefa || empty($titulo)) {
+    header("Location: ../pages/$redirect");
+    exit;
 }
 
-$redirect = $_POST['redirect'] ?? '../pages/dashboard.php';
+// SQL para atualizar a tarefa
+$sql = "UPDATE tarefas 
+        SET titulo = ?, descricao = ?
+        WHERE id_tarefa = ? 
+        AND id_usuario = ?";
 
+$stmt = $conn->prepare($sql);
+$stmt->bind_param(
+    "ssii",
+    $titulo,
+    $descricao,
+    $id_tarefa,
+    $id_usuario
+);
+
+// Executa a atualização
+$stmt->execute();
+
+// Redireciona de volta
 header("Location: ../pages/$redirect");
 exit;
-
-?>

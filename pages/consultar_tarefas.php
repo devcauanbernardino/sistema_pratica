@@ -1,6 +1,22 @@
 <?php
 require_once '../includes/protect.php';
+require_once '../controllers/conexao.php';
 require_once '../includes/header.php';
+
+// ID do usuário logado
+$id_usuario = $_SESSION['id_usuario'];
+
+// Buscar tarefas do usuário no banco
+$sql = "SELECT * FROM tarefas 
+        WHERE id_usuario = ?
+        ORDER BY criado_em DESC";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $id_usuario);
+$stmt->execute();
+
+$resultado = $stmt->get_result();
+$tarefas = $resultado->fetch_all(MYSQLI_ASSOC);
 ?>
 
 <div class="d-flex">
@@ -18,7 +34,7 @@ require_once '../includes/header.php';
             </a>
         </div>
 
-        <?php if (!empty($_SESSION['tarefas'])): ?>
+        <?php if (!empty($tarefas)): ?>
 
             <div class="table-responsive">
                 <table class="table table-hover align-middle shadow-sm">
@@ -32,14 +48,16 @@ require_once '../includes/header.php';
                     </thead>
 
                     <tbody>
-                        <?php foreach ($_SESSION['tarefas'] as $tarefa): ?>
+                        <?php foreach ($tarefas as $tarefa): ?>
                             <tr>
                                 <td><?= htmlspecialchars($tarefa['titulo']) ?></td>
                                 <td><?= htmlspecialchars($tarefa['descricao']) ?></td>
 
                                 <td>
-                                    <?php if ($tarefa['status'] === 'Concluida'): ?>
+                                    <?php if ($tarefa['status'] === 'concluida'): ?>
                                         <span class="badge bg-success">Concluída</span>
+                                    <?php elseif ($tarefa['status'] === 'em_andamento'): ?>
+                                        <span class="badge bg-warning text-dark">Em andamento</span>
                                     <?php else: ?>
                                         <span class="badge bg-secondary">Pendente</span>
                                     <?php endif; ?>
@@ -48,10 +66,14 @@ require_once '../includes/header.php';
                                 <td class="text-center">
 
                                     <!-- EDITAR -->
-                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal"
-                                        data-bs-target="#modalEditar" data-id="<?= $tarefa['id'] ?>"
+                                    <button
+                                        class="btn btn-sm btn-outline-primary"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#modalEditar"
+                                        data-id="<?= $tarefa['id_tarefa'] ?>"
                                         data-titulo="<?= htmlspecialchars($tarefa['titulo']) ?>"
-                                        data-descricao="<?= htmlspecialchars($tarefa['descricao']) ?>">
+                                        data-descricao="<?= htmlspecialchars($tarefa['descricao']) ?>"
+                                    >
                                         <i class="bi bi-pencil-square"></i>
                                     </button>
 
@@ -103,7 +125,6 @@ require_once '../includes/header.php';
                     </button>
                 </form>
 
-
                 <!-- CONCLUIR -->
                 <form action="../controllers/concluir.php" method="POST" class="mb-2">
                     <input type="hidden" name="id" id="concluirId">
@@ -113,7 +134,6 @@ require_once '../includes/header.php';
                         Concluir tarefa
                     </button>
                 </form>
-
 
                 <!-- EXCLUIR -->
                 <form action="../controllers/excluir.php" method="POST">
@@ -125,14 +145,13 @@ require_once '../includes/header.php';
                     </button>
                 </form>
 
-
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function () {
 
     const modalEditar = document.getElementById('modalEditar');
 
@@ -154,7 +173,6 @@ require_once '../includes/header.php';
 
 });
 </script>
-
 
 <?php require_once '../js/js.php'; ?>
 <?php require_once '../includes/footer.php'; ?>
