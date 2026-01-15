@@ -31,17 +31,31 @@ $tarefas = $resultado->fetch_all(MYSQLI_ASSOC);
         </a>
 
         <script>
-            const hour = new Date().getHours();
-            const saudacao = document.getElementById('saudacao');
+    const now = new Date();
+    const hour = now.getHours();
 
-            if (hour < 12) {
-                saudacao.innerText = 'Bom dia, <?= $_SESSION['nome'] ?>!';
-            } else if (hour < 18) {
-                saudacao.innerText = 'Boa tarde, <?= $_SESSION['nome'] ?>!';
-            } else {
-                saudacao.innerText = 'Boa noite, <?= $_SESSION['nome'] ?>!';
-            }
-        </script>
+    const saudacao = document.getElementById('saudacao');
+    const dataEl = document.getElementById('current-datetime');
+
+    if (hour < 12) {
+        saudacao.innerText = 'Bom dia, <?= $_SESSION['nome'] ?>!';
+    } else if (hour < 18) {
+        saudacao.innerText = 'Boa tarde, <?= $_SESSION['nome'] ?>!';
+    } else {
+        saudacao.innerText = 'Boa noite, <?= $_SESSION['nome'] ?>!';
+    }
+
+    // 👉 FORMATA A DATA
+    const dataFormatada = now.toLocaleDateString('pt-BR', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    });
+
+    // 👉 INSERE NO HTML
+    dataEl.innerText = dataFormatada;
+</script>
+
 
         <h4 class="mt-5 mb-3">Minhas tarefas</h4>
 
