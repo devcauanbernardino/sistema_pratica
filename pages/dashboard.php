@@ -31,31 +31,30 @@ $tarefas = $resultado->fetch_all(MYSQLI_ASSOC);
         </a>
 
         <script>
-    const now = new Date();
-    const hour = now.getHours();
+            const now = new Date();
+            const hour = now.getHours();
 
-    const saudacao = document.getElementById('saudacao');
-    const dataEl = document.getElementById('current-datetime');
+            const saudacao = document.getElementById('saudacao');
+            const dataEl = document.getElementById('current-datetime');
 
-    if (hour < 12) {
-        saudacao.innerText = 'Bom dia, <?= $_SESSION['nome'] ?>!';
-    } else if (hour < 18) {
-        saudacao.innerText = 'Boa tarde, <?= $_SESSION['nome'] ?>!';
-    } else {
-        saudacao.innerText = 'Boa noite, <?= $_SESSION['nome'] ?>!';
-    }
+            if (hour < 12) {
+                saudacao.innerText = 'Bom dia, <?= $_SESSION['nome'] ?>!';
+            } else if (hour < 18) {
+                saudacao.innerText = 'Boa tarde, <?= $_SESSION['nome'] ?>!';
+            } else {
+                saudacao.innerText = 'Boa noite, <?= $_SESSION['nome'] ?>!';
+            }
 
-    // 👉 FORMATA A DATA
-    const dataFormatada = now.toLocaleDateString('pt-BR', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric'
-    });
+            //FORMATA A DATA
+            const dataFormatada = now.toLocaleDateString('pt-BR', {
+                day: '2-digit',
+                month: '2-digit',
+                year: 'numeric'
+            });
 
-    // 👉 INSERE NO HTML
-    dataEl.innerText = dataFormatada;
-</script>
-
+            //INSERE NO HTML
+            dataEl.innerText = dataFormatada;
+        </script>
 
         <h4 class="mt-5 mb-3">Minhas tarefas</h4>
 
@@ -67,14 +66,10 @@ $tarefas = $resultado->fetch_all(MYSQLI_ASSOC);
                             <div class="card-body">
 
                                 <!-- BOTÃO EDITAR -->
-                                <button
-                                    class="btn btn-sm btn-outline-primary float-end"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#modalEditar"
-                                    data-id="<?= $tarefa['id_tarefa'] ?>"
+                                <button class="btn btn-sm btn-outline-primary float-end" data-bs-toggle="modal"
+                                    data-bs-target="#modalEditar" data-id="<?= $tarefa['id_tarefa'] ?>"
                                     data-titulo="<?= htmlspecialchars($tarefa['titulo']) ?>"
-                                    data-descricao="<?= htmlspecialchars($tarefa['descricao']) ?>"
-                                >
+                                    data-descricao="<?= htmlspecialchars($tarefa['descricao']) ?>">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
 
@@ -168,27 +163,27 @@ $tarefas = $resultado->fetch_all(MYSQLI_ASSOC);
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {
 
-    const modal = document.getElementById('modalEditar');
+        const modal = document.getElementById('modalEditar');
 
-    modal.addEventListener('show.bs.modal', function (event) {
+        modal.addEventListener('show.bs.modal', function (event) {
 
-        const button = event.relatedTarget;
+            const button = event.relatedTarget;
 
-        const id = button.getAttribute('data-id');
-        const titulo = button.getAttribute('data-titulo');
-        const descricao = button.getAttribute('data-descricao');
+            const id = button.getAttribute('data-id');
+            const titulo = button.getAttribute('data-titulo');
+            const descricao = button.getAttribute('data-descricao');
 
-        document.getElementById('editarId').value = id;
-        document.getElementById('editarTitulo').value = titulo;
-        document.getElementById('editarDescricao').value = descricao;
+            document.getElementById('editarId').value = id;
+            document.getElementById('editarTitulo').value = titulo;
+            document.getElementById('editarDescricao').value = descricao;
 
-        document.getElementById('concluirId').value = id;
-        document.getElementById('excluirId').value = id;
+            document.getElementById('concluirId').value = id;
+            document.getElementById('excluirId').value = id;
+        });
+
     });
-
-});
 </script>
 
 
