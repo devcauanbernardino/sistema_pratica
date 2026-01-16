@@ -1,7 +1,8 @@
 <?php
 require_once '../includes/protect.php';
 require_once '../includes/header.php';
-?>
+require_once '../controllers/conexao.php'
+    ?>
 
 <div class="d-flex">
 
@@ -42,6 +43,20 @@ require_once '../includes/header.php';
                                     <input type="date" name="data_prazo" class="form-control" required>
                                 </div>
                             </div>
+                                <?php if (isset($_GET['erro'])): ?>
+
+                                        <?php if ($_GET['erro'] === 'data_invalida'): ?>
+                                            <div class="alert alert-danger">
+                                                Não é permitido usar datas anteriores a hoje.
+                                            </div>
+
+                                        <?php elseif ($_GET['erro'] === 'prazo_invalido'): ?>
+                                            <div class="alert alert-danger">
+                                                O prazo não pode ser menor que a data de início.
+                                            </div>
+                                        <?php endif; ?>
+
+                                    <?php endif; ?>
 
                             <div class="d-flex gap-2">
                                 <button type="submit" class="btn btn-primary">

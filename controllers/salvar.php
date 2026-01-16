@@ -17,6 +17,21 @@ if (empty($titulo)) {
     exit;
 }
 
+//Validacao de datas
+$hoje = date('Y-m-d');
+
+// Prazo menor que data de início
+if ($data_prazo < $data_inicio) {
+    header('Location: ../pages/cadastro_tarefas.php?erro=prazo_invalido');
+    exit;
+}
+
+// Datas anteriores a hoje
+if ($data_inicio < $hoje || $data_prazo < $hoje) {
+    header('Location: ../pages/cadastro_tarefas.php?erro=data_invalida');
+    exit;
+}
+
 // SQL para inserir a tarefa no banco
 $sql = "INSERT INTO tarefas 
         (id_usuario, titulo, descricao, status, data_inicio, prazo) 
